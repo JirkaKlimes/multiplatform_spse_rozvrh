@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:spse_rozvrh/utils/size_config.dart';
 
 class DatePicker extends StatelessWidget {
   final daylist = ['Po', 'Út', 'St', 'Čt', 'Pá'];
