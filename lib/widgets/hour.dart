@@ -24,9 +24,11 @@ class Hour extends StatelessWidget {
   late String startTime;
   late String endTime;
   late String subject;
-  late String teacher;
+  late String teacherOrCls;
   late String room;
   late String change;
+
+  late bool isTeacher;
 
   @override
   Hour(this.data, this.hourIndex, this.dayIndex, {super.key});
@@ -276,15 +278,15 @@ class Hour extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
-                                Icons.person,
+                              Icon(
+                                isTeacher ? Icons.group : Icons.person,
                                 color: Colors.white,
                               ),
                               const SizedBox(
                                 height: 15,
                               ),
                               Text(
-                                teacher,
+                                teacherOrCls,
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -542,15 +544,15 @@ class Hour extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
-                                Icons.person,
+                              Icon(
+                                isTeacher ? Icons.group : Icons.person,
                                 color: Colors.white,
                               ),
                               const SizedBox(
                                 height: 15,
                               ),
                               Text(
-                                teacher,
+                                teacherOrCls,
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -578,8 +580,9 @@ class Hour extends StatelessWidget {
       Map hour = day['$hourIndex'][0];
       subject = hour['subject'];
       room = hour['room'];
-      teacher = hour['teacher'];
+      teacherOrCls = hour.containsKey('teacher') ? hour['teacher'] : hour['cls'];
       change = hour['change'];
+      isTeacher = hour.containsKey('cls') ? true : false;
     }
     if (day.containsKey('$hourIndex')) {
       if (change == "none") {

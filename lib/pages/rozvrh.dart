@@ -36,8 +36,8 @@ class RozvrhPageState extends State<RozvrhPage> {
       refresh();
     }
 
-    Timer? timer;
-    timer = Timer.periodic(Duration(seconds: 60), (Timer t) => refresh());
+    // Timer? timer;
+    // timer = Timer.periodic(Duration(seconds: 60), (Timer t) => refresh());
     DatePicker datePicker =
         DatePicker(widget.selected, widget.data, changeSelected);
     WeekView weekView = WeekView(

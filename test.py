@@ -1,12 +1,13 @@
 import requests
 import time
 from pprint import pprint
+import sys
 
 
 payload = {
     "cmd": "get",
     "data": {
-        "id": "!klimesji20",
+        "id":sys.argv[1],
         "date": int(time.time() * 1000)
     }
 }
