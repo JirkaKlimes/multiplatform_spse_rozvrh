@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/widgets/hour.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 
@@ -26,7 +27,7 @@ class DayPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-        color: Colors.white,
+        color: CustomColors().color3,
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
           clipBehavior: Clip.antiAlias,

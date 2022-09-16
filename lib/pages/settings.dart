@@ -1,35 +1,67 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/utils/shared_prefs.dart';
 
-class Settings extends StatelessWidget {
-  @override
+class SettingsPage extends StatefulWidget {
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<StatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text('Nastavení'),
-          backgroundColor: Colors.black,
-          leading:
-            IconButton(
-                
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios))
-          ,
+          title: Text('Nastavení'),
+          backgroundColor: CustomColors().color1,
+          leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back_ios)),
         ),
         body: Container(
-            color: Colors.grey,
-            // ignore: prefer_const_literals_to_create_immutables
-            child: Column(children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                    textAlign: TextAlign.center,
-                    initialValue: SharedPrefs().username,
-                    onChanged: (value) => {SharedPrefs().username = value},
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Zadejte jméno na intranet...')),
+          color: CustomColors().color1,
+          child: SizedBox.expand(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                  color: CustomColors().color3,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(28),
+                    topRight: Radius.circular(28),
+                  )),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.person,
+                          size: 100,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 270,
+                        child: TextFormField(
+                          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.left,
+                          initialValue: SharedPrefs().username,
+                          onChanged: (value) => {SharedPrefs().username = value},
+                          decoration: const InputDecoration.collapsed(
+                            hintText: "Zadejte jméno na intranet...",
+                            hintStyle: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
-            ])));
+            ),
+          ),
+        ));
   }
 }
+
+
+//  onChanged: (value) => {SharedPrefs().username = value},

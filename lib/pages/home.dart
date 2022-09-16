@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spse_rozvrh/pages/rozvrh.dart';
 import 'package:spse_rozvrh/pages/settings.dart';
+import 'package:spse_rozvrh/pages/rozvrh.dart';
+import 'package:spse_rozvrh/utils/colorTheme.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -11,8 +12,8 @@ class HomePage extends StatelessWidget {
     RozvrhPage rozvrhpage = RozvrhPage(key: _key);
     return Scaffold(
         appBar: AppBar(
-          title: const Text('SPŠE Rozvrh'),
-          backgroundColor: Colors.black,
+          title: const Text('Rozvrh Hodin'),
+          backgroundColor: CustomColors().color1,
           toolbarHeight: 68,
           actions: [
             IconButton(
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
             IconButton(
                 onPressed: (() => {
                   Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => Settings()
+                    builder: (context) => SettingsPage()
                     ))}),
                 icon: const Icon(
                   Icons.more_vert,
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
                 )),
           ],
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: CustomColors().color1,
         body: rozvrhpage
         );
   }

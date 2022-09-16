@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:spse_rozvrh/utils/colorTheme.dart';
 
 class DatePicker extends StatelessWidget {
   final daylist = ['Po', 'Út', 'St', 'Čt', 'Pá'];
@@ -30,9 +31,9 @@ class DatePicker extends StatelessWidget {
     return Container(
         height: 100,
         padding: EdgeInsets.symmetric(vertical: 12),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
+        decoration:  BoxDecoration(
+            color: CustomColors().color3,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(28),
               topRight: Radius.circular(28),
             )),
@@ -46,8 +47,8 @@ class DatePicker extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   color: selected == index
-                      ? Colors.grey
-                      : const Color.fromARGB(0, 255, 255, 255),
+                      ? CustomColors().color5
+                      : Colors.transparent,
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               width: ((width - 2 * 12) / 5),
               child: Column(
@@ -57,7 +58,7 @@ class DatePicker extends StatelessWidget {
                   ),
                   Text(daylist[index],
                       style: TextStyle(
-                          color: selected == index ? Colors.black : Colors.grey,
+                          color: selected == index ? Colors.black : Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold)),
                   const SizedBox(
@@ -67,7 +68,7 @@ class DatePicker extends StatelessWidget {
                   Text(
                       '${DateTime.fromMillisecondsSinceEpoch(data['days']['$index']["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days']['$index']["date"]).month - 1]}',
                       style: TextStyle(
-                          color: selected == index ? Colors.black : Colors.grey,
+                          color: selected == index ? Colors.black : Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.bold)),
                   const SizedBox(
@@ -81,7 +82,7 @@ class DatePicker extends StatelessWidget {
                         color: (DateTime.now().weekday - 1 == index &&
                                 index != selected)
                             ? Colors.green
-                            : Color.fromARGB(0, 255, 255, 255)),
+                            : Colors.transparent),
                   ),
                 ],
               ),

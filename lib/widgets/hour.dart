@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:spse_rozvrh/utils/colorTheme.dart';
 
+
+// ignore: must_be_immutable
 class Hour extends StatelessWidget {
   Map data;
   int hourIndex;
   int dayIndex;
 
   double widgetHeight = 95;
+  double widgetWidthOfset = 30;
+
+  BoxShadow boxShadow = BoxShadow(
+                color: CustomColors().color2.withOpacity(0.6),
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: const Offset(0, 4));
+
+  Color colorBkg = CustomColors().color2;
+
+  EdgeInsets edgeInsets = const EdgeInsets.symmetric(horizontal: 8, vertical: 10);
 
   late String startTime;
   late String endTime;
@@ -15,17 +29,25 @@ class Hour extends StatelessWidget {
   late String change;
 
   @override
-  Hour(this.data, this.hourIndex, this.dayIndex);
+  Hour(this.data, this.hourIndex, this.dayIndex, {super.key});
 
   Widget freeHour(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: edgeInsets,
       decoration: BoxDecoration(
-          color: Colors.black, borderRadius: BorderRadius.circular(20)),
+          color: CustomColors().color6,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: CustomColors().color6.withOpacity(0.6),
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: const Offset(0, 4))
+          ]),
       child: SizedBox(
-        width: width - 30,
+        width: width - widgetWidthOfset,
         height: widgetHeight,
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           const SizedBox(
@@ -113,15 +135,21 @@ class Hour extends StatelessWidget {
 
   Widget changedHour(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    Map day = data['items'][dayIndex];
-    Map hour = day['$hourIndex'][0];
 
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: edgeInsets,
       decoration: BoxDecoration(
-          color: Colors.black, borderRadius: BorderRadius.circular(20)),
+          color: CustomColors().color4,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: CustomColors().color4.withOpacity(0.6),
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: const Offset(0, 4))
+          ]),
       child: SizedBox(
-        width: width - 30,
+        width: width - widgetWidthOfset,
         height: widgetHeight,
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           const SizedBox(
@@ -275,15 +303,21 @@ class Hour extends StatelessWidget {
 
   Widget dropedHour(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    Map day = data['items'][dayIndex];
-    Map hour = day['$hourIndex'][0];
 
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: edgeInsets,
       decoration: BoxDecoration(
-          color: Colors.black, borderRadius: BorderRadius.circular(20)),
+          color: CustomColors().color6,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: CustomColors().color6.withOpacity(0.6),
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: const Offset(0, 4))
+          ]),
       child: SizedBox(
-        width: width - 30,
+        width: width - widgetWidthOfset,
         height: widgetHeight,
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           const SizedBox(
@@ -371,15 +405,17 @@ class Hour extends StatelessWidget {
 
   Widget normalHour(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    Map day = data['items'][dayIndex];
-    Map hour = day['$hourIndex'][0];
 
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: edgeInsets,
       decoration: BoxDecoration(
-          color: Colors.black, borderRadius: BorderRadius.circular(20)),
+          color: colorBkg,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            boxShadow
+          ]),
       child: SizedBox(
-        width: width - 30,
+        width: width - widgetWidthOfset,
         height: widgetHeight,
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           const SizedBox(
@@ -532,7 +568,6 @@ class Hour extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
 
     Map day = data['items'][dayIndex];
 

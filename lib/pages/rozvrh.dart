@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/utils/shared_prefs.dart';
 import 'package:spse_rozvrh/widgets/day_picker.dart';
 import 'package:spse_rozvrh/widgets/week_view.dart';
@@ -46,7 +47,7 @@ class RozvrhPageState extends State<RozvrhPage> {
       return const Scaffold(backgroundColor: Colors.black);
     } else {
       return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: CustomColors().color1,
         body: Column(
           children: [datePicker, weekView],
         ),
