@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                 )),
           ],
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.green,
         body: rozvrhpage
         );
   }

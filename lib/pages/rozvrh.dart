@@ -27,13 +27,12 @@ class RozvrhPageState extends State<RozvrhPage> {
   Widget build(BuildContext context) {
     DatePicker datePicker =
         DatePicker(widget.selected, widget.data, changeSelected);
-    // var pageController = PageController(initialPage: widget.selected);
     WeekView weekView = WeekView(widget.selected, widget.data, changeSelected, widget.pageController);
     refresh();
     // ignore: prefer_const_constructors
     if (widget.data.isEmpty) {
       return const Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black
       );
     } else {
       return Scaffold(

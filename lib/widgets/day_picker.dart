@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:spse_rozvrh/utils/size_config.dart';
 
 class DatePicker extends StatelessWidget {
-  final daylist = ['Pon', 'Út', 'Stř', 'Čt', 'Pá'];
+  final daylist = ['Po', 'Út', 'St', 'Čt', 'Pá'];
+  final monthList = [
+    "led",
+    "úno",
+    "bře",
+    "dub",
+    "kvě",
+    "čvn",
+    "čvc",
+    "srp",
+    "zář",
+    "říj",
+    "lis",
+    "pro"
+  ];
 
   Map data;
   int selected;
@@ -12,10 +27,10 @@ class DatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('picker building');
+    double width = MediaQuery.of(context).size.width;
     return Container(
         height: 100,
-        padding: EdgeInsets.symmetric(vertical: 18),
+        padding: EdgeInsets.symmetric(vertical: 12),
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -24,26 +39,20 @@ class DatePicker extends StatelessWidget {
             )),
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          separatorBuilder: (_, index) => SizedBox(width: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          separatorBuilder: (_, index) => const SizedBox(width: 0),
           itemCount: daylist.length,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () => callback(index),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-              margin: const EdgeInsets.symmetric(horizontal: 11),
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(30)),
+              decoration: BoxDecoration(
+                  color: selected == index
+                      ? Colors.grey
+                      : const Color.fromARGB(0, 255, 255, 255),
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+              width: ((width - 2 * 12) / 5),
               child: Column(
                 children: [
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: DateTime.now().weekday - 1 == index
-                            ? Colors.green
-                            : Colors.white),
-                  ),
                   const SizedBox(
                     height: 8,
                   ),
@@ -57,11 +66,24 @@ class DatePicker extends StatelessWidget {
                   ),
                   // Text('$index',
                   Text(
-                      '${DateTime.fromMillisecondsSinceEpoch(data['days']['$index']["date"]).day}',
+                      '${DateTime.fromMillisecondsSinceEpoch(data['days']['$index']["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days']['$index']["date"]).month - 1]}',
                       style: TextStyle(
                           color: selected == index ? Colors.black : Colors.grey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold))
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold)),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: (DateTime.now().weekday - 1 == index &&
+                                index != selected)
+                            ? Colors.green
+                            : Color.fromARGB(0, 255, 255, 255)),
+                  ),
                 ],
               ),
             ),
