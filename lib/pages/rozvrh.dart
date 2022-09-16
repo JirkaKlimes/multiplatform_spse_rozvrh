@@ -16,6 +16,8 @@ class RozvrhPage extends StatefulWidget {
 
   int requestTime = 0;
 
+  bool initialyRefreshed = false;
+
   PageController pageController =
       PageController(initialPage: DateTime.now().weekday - 1);
 }
@@ -28,9 +30,13 @@ class RozvrhPageState extends State<RozvrhPage> {
   }
 
   Widget build(BuildContext context) {
+
+    if (!widget.initialyRefreshed){
+      refresh();
+    }
+
     Timer? timer;
     timer = Timer.periodic(Duration(seconds: 60), (Timer t) => refresh());
-    refresh();
     DatePicker datePicker =
         DatePicker(widget.selected, widget.data, changeSelected);
     WeekView weekView = WeekView(
@@ -73,6 +79,9 @@ class RozvrhPageState extends State<RozvrhPage> {
       widget.data = json.decode(value.body);
       SharedPrefs().lastUpdateTime = widget.requestTime;
       setState(() {});
+      if (!widget.initialyRefreshed){
+        widget.initialyRefreshed = true;
+      }
     }
   }
 
