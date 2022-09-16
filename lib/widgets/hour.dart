@@ -279,7 +279,7 @@ class Hour extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                isTeacher ? Icons.group : Icons.person,
+                                isTeacher ? Icons.groups : Icons.person,
                                 color: Colors.white,
                               ),
                               const SizedBox(
@@ -545,7 +545,7 @@ class Hour extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                isTeacher ? Icons.group : Icons.person,
+                                isTeacher ? Icons.groups : Icons.person,
                                 color: Colors.white,
                               ),
                               const SizedBox(
