@@ -10,11 +10,11 @@ class CustomColors {
   late Color color6;
   
   CustomColors() {
-    color1 = Color.fromARGB(255, 2, 3, 0);
-    color2 = Color.fromARGB(255, 54, 51, 42);
-    color3 = Color.fromARGB(255, 89, 84, 75);
-    color4 = Color.fromARGB(255, 227, 117, 102);
-    color5 = Color.fromARGB(255, 121, 169, 209);
-    color6 = Color.fromARGB(255, 76, 156, 89);
+    color1 = const Color.fromARGB(255, 2, 3, 0);
+    color2 = const Color.fromARGB(255, 54, 51, 42);
+    color3 = const Color.fromARGB(255, 89, 84, 75);
+    color4 = const Color.fromARGB(255, 227, 117, 102);
+    color5 = const Color.fromARGB(255, 121, 169, 209);
+    color6 = const Color.fromARGB(255, 76, 156, 89);
   }
 }

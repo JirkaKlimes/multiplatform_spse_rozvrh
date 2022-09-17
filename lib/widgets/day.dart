@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/widgets/hour.dart';
-import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 
 class DayPage extends StatelessWidget {
   Map data;
@@ -11,7 +10,16 @@ class DayPage extends StatelessWidget {
   DayPage(this.data, this.dayIndex);
 
   List<Hour> createHours() {
-    Map day = data['items'][dayIndex];
+    var day = data['items'][dayIndex];
+
+    if (day is List){
+      Map tempDay = {};
+      for (int i = 0; i < day.length; i++){
+        tempDay['$i'] = day[i];
+      }
+      day = tempDay;
+    }
+
     int firstHour = int.parse(day.entries.first.key);
     int lastHour = int.parse(day.entries.last.key);
 
@@ -23,6 +31,7 @@ class DayPage extends StatelessWidget {
     return hours;
   }
 
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 

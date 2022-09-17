@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -11,16 +10,17 @@ import 'package:spse_rozvrh/widgets/week_view.dart';
 class RozvrhPage extends StatefulWidget {
   RozvrhPage({Key? key}) : super(key: key);
 
+  @override
   RozvrhPageState createState() => RozvrhPageState();
   Map data = {};
-  int selected = DateTime.now().weekday - 1;
+  int selected = (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1);
 
   int requestTime = 0;
 
   bool initialyRefreshed = false;
 
   PageController pageController =
-      PageController(initialPage: DateTime.now().weekday - 1);
+      PageController(initialPage: (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1));
 }
 
 class RozvrhPageState extends State<RozvrhPage> {
@@ -30,6 +30,7 @@ class RozvrhPageState extends State<RozvrhPage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
 
     if (!widget.initialyRefreshed){
@@ -42,7 +43,6 @@ class RozvrhPageState extends State<RozvrhPage> {
         DatePicker(widget.selected, widget.data, changeSelected);
     WeekView weekView = WeekView(
         widget.selected, widget.data, changeSelected, widget.pageController);
-    // ignore: prefer_const_constructors
     if (widget.data.isEmpty) {
       return const Scaffold(backgroundColor: Colors.black);
     } else {
@@ -55,14 +55,9 @@ class RozvrhPageState extends State<RozvrhPage> {
     }
   }
 
-  Future<void> _pullRefresh() async {
-    refresh();
-  }
-
   void getData() async {
     var username = SharedPrefs().username;
     widget.requestTime = DateTime.now().millisecondsSinceEpoch;
-    // print(time);
     Map payload = {
       "cmd": "get",
       "data": {"id": "!$username", "date": widget.requestTime}
@@ -70,7 +65,7 @@ class RozvrhPageState extends State<RozvrhPage> {
 
     String encoded = json.encode(payload);
 
-    var response = await http
+    await http
         .post(Uri.parse('http://rozvrh.spse.cz/index.php'), body: encoded)
         .then(updateData);
   }
@@ -79,10 +74,14 @@ class RozvrhPageState extends State<RozvrhPage> {
     if (value.statusCode == 200) {
       widget.data = json.decode(value.body);
       SharedPrefs().lastUpdateTime = widget.requestTime;
+      SharedPrefs().encodedData = json.encode(widget.data);
       setState(() {});
       if (!widget.initialyRefreshed){
         widget.initialyRefreshed = true;
       }
+    }
+    else {
+      widget.data = json.decode(SharedPrefs().encodedData);
     }
   }
 

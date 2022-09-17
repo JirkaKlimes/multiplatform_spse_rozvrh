@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
 
 class DatePicker extends StatelessWidget {
@@ -27,10 +26,12 @@ class DatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     double width = MediaQuery.of(context).size.width;
+
     return Container(
         height: 100,
-        padding: EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         decoration:  BoxDecoration(
             color: CustomColors().color3,
             borderRadius: const BorderRadius.only(
@@ -66,7 +67,7 @@ class DatePicker extends StatelessWidget {
                   ),
                   // Text('$index',
                   Text(
-                      '${DateTime.fromMillisecondsSinceEpoch(data['days']['$index']["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days']['$index']["date"]).month - 1]}',
+                      '${DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).month - 1]}',
                       style: TextStyle(
                           color: selected == index ? Colors.black : Colors.white,
                           fontSize: 14,

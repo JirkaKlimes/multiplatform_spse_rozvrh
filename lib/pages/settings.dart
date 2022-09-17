@@ -4,14 +4,16 @@ import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/utils/shared_prefs.dart';
 
 class SettingsPage extends StatefulWidget {
+  @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<StatefulWidget> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Nastavení'),
+          title: const Text('Nastavení'),
           backgroundColor: CustomColors().color1,
           leading: IconButton(
               onPressed: () => Navigator.pop(context),
