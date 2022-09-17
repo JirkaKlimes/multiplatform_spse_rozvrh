@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/widgets/day.dart';
 
 class WeekView extends StatelessWidget {
@@ -15,7 +14,7 @@ class WeekView extends StatelessWidget {
   Widget build(BuildContext context) {
     var cont = Expanded(
       child: Container(
-        decoration: BoxDecoration(color: Colors.transparent),
+        decoration: const BoxDecoration(color: Colors.transparent),
         child: PageView(
           controller: pageController,
           onPageChanged: (value) => isPageAnimating ? null : callback(value),

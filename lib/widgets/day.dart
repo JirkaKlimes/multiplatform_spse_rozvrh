@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/widgets/hour.dart';
+import 'package:spse_rozvrh/utils/colorTheme.dart';
+
 
 class DayPage extends StatelessWidget {
   Map data;
@@ -20,23 +21,27 @@ class DayPage extends StatelessWidget {
       day = tempDay;
     }
 
+    if (day != null){
     int firstHour = int.parse(day.entries.first.key);
     int lastHour = int.parse(day.entries.last.key);
 
     List<Hour> hours = List.empty(growable: true);
-
+    
     for (int i = firstHour; i <= lastHour; i++) {
       hours.add(Hour(data, i, dayIndex));
     }
     return hours;
-  }
+    }
+    return List.empty();
+    }
+
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-        color: CustomColors().color3,
+        color: CustomColors().secondaryBkg,
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
           clipBehavior: Clip.antiAlias,

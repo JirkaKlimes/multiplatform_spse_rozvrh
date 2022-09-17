@@ -10,12 +10,6 @@ class Hour extends StatelessWidget {
   double widgetHeight = 95;
   double widgetWidthOfset = 30;
 
-  BoxShadow boxShadow = BoxShadow(
-      color: CustomColors().color2,
-      spreadRadius: 3,
-      blurRadius: 6,
-      offset: const Offset(0, 4));
-
   EdgeInsets edgeInsets =
       const EdgeInsets.symmetric(horizontal: 8, vertical: 10);
 
@@ -63,8 +57,8 @@ class Hour extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   '$hourIndex',
-                  style: const TextStyle(
-                      color: Colors.white,
+                  style: TextStyle(
+                      color: CustomColors().primaryText,
                       fontWeight: FontWeight.bold,
                       fontSize: 16),
                 ),
@@ -84,8 +78,8 @@ class Hour extends StatelessWidget {
                       color: Colors.transparent,
                       child: Text(
                         startTime,
-                        style: const TextStyle(
-                            color: Colors.white,
+                        style: TextStyle(
+                            color: CustomColors().primaryText,
                             fontWeight: FontWeight.bold,
                             fontSize: 13),
                       ),
@@ -97,15 +91,15 @@ class Hour extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(vertical: 8),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: Colors.white),
+                            color: CustomColors().primaryText),
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       child: Text(
                         endTime,
-                        style: const TextStyle(
-                            color: Colors.white,
+                        style: TextStyle(
+                            color: CustomColors().primaryText,
                             fontWeight: FontWeight.bold,
                             fontSize: 13),
                       ),
@@ -133,23 +127,23 @@ class Hour extends StatelessWidget {
 
     return hourFrame(
       context,
-      CustomColors().color6,
+      CustomColors().freeHour,
       [
         SizedBox(
           width: width / 5,
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
           ),
         ),
-        const Icon(Icons.fastfood, color: Colors.white, size: 50),
+        Icon(Icons.fastfood, color: CustomColors().primaryText, size: 50),
         SizedBox(
           width: width / 5,
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
           ),
         ),
         const SizedBox(
@@ -163,7 +157,7 @@ class Hour extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return hourFrame(
       context,
-      CustomColors().color4,
+      CustomColors().changedHour,
       [
         SizedBox(
           // width: 80,
@@ -171,8 +165,8 @@ class Hour extends StatelessWidget {
             color: Colors.transparent,
             child: Text(
               subject,
-              style: const TextStyle(
-                  color: Colors.white,
+              style: TextStyle(
+                  color: CustomColors().primaryText,
                   fontWeight: FontWeight.bold,
                   fontSize: 40),
             ),
@@ -189,17 +183,17 @@ class Hour extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.meeting_room_sharp,
-                  color: Colors.white,
+                  color: CustomColors().primaryText,
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 Text(
                   room.replaceAll('(', '').replaceAll(')', ''),
-                  style: const TextStyle(
-                      color: Colors.white,
+                  style: TextStyle(
+                      color: CustomColors().primaryText,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 )
@@ -220,15 +214,15 @@ class Hour extends StatelessWidget {
               children: [
                 Icon(
                   isTeacher ? Icons.groups : Icons.person,
-                  color: Colors.white,
+                  color: CustomColors().primaryText,
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 Text(
                   teacherOrCls,
-                  style: const TextStyle(
-                      color: Colors.white,
+                  style: TextStyle(
+                      color: CustomColors().primaryText,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 )
@@ -245,23 +239,23 @@ class Hour extends StatelessWidget {
 
     return hourFrame(
       context,
-      CustomColors().color6,
+      CustomColors().droppedHour,
       [
         SizedBox(
           width: width / 5,
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
           ),
         ),
-        const Icon(Icons.delete, color: Colors.white, size: 50),
+        Icon(Icons.delete, color: CustomColors().primaryText, size: 50),
         SizedBox(
           width: width / 5,
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
           ),
         ),
         const SizedBox(
@@ -276,7 +270,7 @@ class Hour extends StatelessWidget {
 
     return hourFrame(
       context,
-      CustomColors().color2,
+      CustomColors().normalHour,
       [
         // const SizedBox(
         // width: 5,
@@ -287,8 +281,8 @@ class Hour extends StatelessWidget {
             color: Colors.transparent,
             child: Text(
               subject,
-              style: const TextStyle(
-                  color: Colors.white,
+              style: TextStyle(
+                  color: CustomColors().primaryText,
                   fontWeight: FontWeight.bold,
                   fontSize: 40),
             ),
@@ -305,17 +299,17 @@ class Hour extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.meeting_room_sharp,
-                  color: Colors.white,
+                  color: CustomColors().primaryText,
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 Text(
                   room.replaceAll('(', '').replaceAll(')', ''),
-                  style: const TextStyle(
-                      color: Colors.white,
+                  style: TextStyle(
+                      color: CustomColors().primaryText,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 )
@@ -336,15 +330,15 @@ class Hour extends StatelessWidget {
               children: [
                 Icon(
                   isTeacher ? Icons.groups : Icons.person,
-                  color: Colors.white,
+                  color: CustomColors().primaryText,
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 Text(
                   teacherOrCls,
-                  style: const TextStyle(
-                      color: Colors.white,
+                  style: TextStyle(
+                      color: CustomColors().primaryText,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 )

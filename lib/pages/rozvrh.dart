@@ -13,14 +13,15 @@ class RozvrhPage extends StatefulWidget {
   @override
   RozvrhPageState createState() => RozvrhPageState();
   Map data = {};
-  int selected = (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1);
+  int selected =
+      (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1);
 
   int requestTime = 0;
-
   bool initialyRefreshed = false;
 
-  PageController pageController =
-      PageController(initialPage: (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1));
+  PageController pageController = PageController(
+      initialPage:
+          (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1));
 }
 
 class RozvrhPageState extends State<RozvrhPage> {
@@ -32,22 +33,20 @@ class RozvrhPageState extends State<RozvrhPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    if (!widget.initialyRefreshed){
+    if (!widget.initialyRefreshed) {
+      widget.initialyRefreshed = true;
       refresh();
     }
 
-    // Timer? timer;
-    // timer = Timer.periodic(Duration(seconds: 60), (Timer t) => refresh());
     DatePicker datePicker =
         DatePicker(widget.selected, widget.data, changeSelected);
     WeekView weekView = WeekView(
         widget.selected, widget.data, changeSelected, widget.pageController);
     if (widget.data.isEmpty) {
-      return const Scaffold(backgroundColor: Colors.black);
+      return Scaffold(backgroundColor: CustomColors().secondaryBkg);
     } else {
       return Scaffold(
-        backgroundColor: CustomColors().color1,
+        backgroundColor: CustomColors().primaryBkg,
         body: Column(
           children: [datePicker, weekView],
         ),
@@ -64,24 +63,31 @@ class RozvrhPageState extends State<RozvrhPage> {
     };
 
     String encoded = json.encode(payload);
-
-    await http
-        .post(Uri.parse('http://rozvrh.spse.cz/index.php'), body: encoded)
-        .then(updateData);
+    try {
+      await http
+          .post(Uri.parse('http://rozvrh.spse.cz/index.php'), body: encoded)
+          .then(updateData);
+    } catch (e) {
+      if (SharedPrefs().encodedData != "") {
+        widget.data = json.decode(SharedPrefs().encodedData);
+        setState(() {});
+      } else {
+        widget.initialyRefreshed = false;
+      }
+    }
   }
 
   void updateData(http.Response value) {
     if (value.statusCode == 200) {
       widget.data = json.decode(value.body);
-      SharedPrefs().lastUpdateTime = widget.requestTime;
       SharedPrefs().encodedData = json.encode(widget.data);
+      SharedPrefs().lastUpdateTime = widget.requestTime;
       setState(() {});
-      if (!widget.initialyRefreshed){
-        widget.initialyRefreshed = true;
-      }
-    }
-    else {
+    } else if (SharedPrefs().encodedData != "") {
       widget.data = json.decode(SharedPrefs().encodedData);
+      setState(() {});
+    } else {
+      widget.initialyRefreshed = false;
     }
   }
 

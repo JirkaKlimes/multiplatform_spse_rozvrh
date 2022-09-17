@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/utils/shared_prefs.dart';
@@ -14,18 +13,18 @@ class _SettingsPageState extends State<StatefulWidget> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Nastavení'),
-          backgroundColor: CustomColors().color1,
+          backgroundColor: CustomColors().primaryBkg,
           leading: IconButton(
               onPressed: () => Navigator.pop(context),
               icon: const Icon(Icons.arrow_back_ios)),
         ),
         body: Container(
-          color: CustomColors().color1,
+          color: CustomColors().primaryBkg,
           child: SizedBox.expand(
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
-                  color: CustomColors().color3,
+                  color: CustomColors().secondaryBkg,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(28),
                     topRight: Radius.circular(28),
@@ -35,28 +34,30 @@ class _SettingsPageState extends State<StatefulWidget> {
                 children: [
                   Row(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.person,
+                          color: CustomColors().primaryText,
                           size: 100,
                         ),
                       ),
                       SizedBox(
                         width: 270,
                         child: TextFormField(
-                          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: CustomColors().primaryText),
                           textAlign: TextAlign.left,
                           initialValue: SharedPrefs().username,
                           onChanged: (value) => {SharedPrefs().username = value},
-                          decoration: const InputDecoration.collapsed(
+                          decoration: InputDecoration.collapsed(
                             hintText: "Zadejte jméno na intranet...",
-                            hintStyle: TextStyle(fontSize: 18),
+                            hintStyle: TextStyle(fontSize: 18, color: CustomColors().primaryText),
                           ),
                         ),
                       ),
                     ],
-                  )
+                  ),
+                Container()
                 ],
               ),
             ),

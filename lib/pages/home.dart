@@ -1,40 +1,51 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:spse_rozvrh/pages/settings.dart';
 import 'package:spse_rozvrh/pages/rozvrh.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
 
 class HomePage extends StatelessWidget {
-
   final GlobalKey<RozvrhPageState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     RozvrhPage rozvrhpage = RozvrhPage(key: _key);
-    return Scaffold(
+
+
+    Timer.periodic(const Duration(seconds: 60), (timer) {
+    _key.currentState?.refresh();
+    });
+
+
+    Scaffold scaffold = Scaffold(
         appBar: AppBar(
           title: const Text('Rozvrh Hodin'),
-          backgroundColor: CustomColors().color1,
+          backgroundColor: CustomColors().primaryBkg,
           toolbarHeight: 68,
+          elevation: 0,
           actions: [
             IconButton(
                 onPressed: () => _key.currentState!.refresh(),
-                icon: const Icon(
+                icon: Icon(
                   Icons.refresh,
-                  color: Colors.white,
+                  color: CustomColors().primaryText,
                 )),
             IconButton(
                 onPressed: (() => {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => SettingsPage()
-                    ))}),
-                icon: const Icon(
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsPage()))
+                    }),
+                icon: Icon(
                   Icons.more_vert,
-                  color: Colors.white,
+                  color: CustomColors().primaryText,
                 )),
           ],
         ),
-        backgroundColor: CustomColors().color1,
-        body: rozvrhpage
-        );
+        backgroundColor: CustomColors().primaryBkg,
+        body: rozvrhpage);
+    
+    return scaffold;
   }
 }

@@ -33,7 +33,7 @@ class DatePicker extends StatelessWidget {
         height: 100,
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration:  BoxDecoration(
-            color: CustomColors().color3,
+            color: CustomColors().secondaryBkg,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(28),
               topRight: Radius.circular(28),
@@ -48,7 +48,7 @@ class DatePicker extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   color: selected == index
-                      ? CustomColors().color5
+                      ? CustomColors().selectedDay
                       : Colors.transparent,
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               width: ((width - 2 * 12) / 5),
@@ -59,7 +59,7 @@ class DatePicker extends StatelessWidget {
                   ),
                   Text(daylist[index],
                       style: TextStyle(
-                          color: selected == index ? Colors.black : Colors.white,
+                          color: selected == index ? CustomColors().secondaryText : CustomColors().primaryText,
                           fontSize: 18,
                           fontWeight: FontWeight.bold)),
                   const SizedBox(
@@ -69,7 +69,7 @@ class DatePicker extends StatelessWidget {
                   Text(
                       '${DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).month - 1]}',
                       style: TextStyle(
-                          color: selected == index ? Colors.black : Colors.white,
+                          color: selected == index ? CustomColors().secondaryText : CustomColors().primaryText,
                           fontSize: 14,
                           fontWeight: FontWeight.bold)),
                   const SizedBox(
@@ -82,7 +82,7 @@ class DatePicker extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: (DateTime.now().weekday - 1 == index &&
                                 index != selected)
-                            ? Colors.green
+                            ? CustomColors().currentDay
                             : Colors.transparent),
                   ),
                 ],
