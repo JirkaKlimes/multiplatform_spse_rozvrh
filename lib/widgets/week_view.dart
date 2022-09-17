@@ -6,12 +6,15 @@ class WeekView extends StatelessWidget {
   int selected;
   Function callback;
   PageController pageController;
-  bool isPageAnimating = false;
 
   WeekView(this.selected, this.data, this.callback, this.pageController);
 
-  List<DayPage> createDays() {
-    return [
+  bool isPageAnimating = false;
+
+  late List<Widget> days;
+
+  void createDayWidgets() {
+    days = [
       DayPage(data, 0),
       DayPage(data, 1),
       DayPage(data, 2),
@@ -22,13 +25,16 @@ class WeekView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    createDayWidgets();
+
     var cont = Expanded(
       child: Container(
         decoration: const BoxDecoration(color: Colors.transparent),
         child: PageView(
           controller: pageController,
-          onPageChanged: (value) => isPageAnimating ? null : callback(value),
-          children: createDays(),
+          onPageChanged: (value) =>
+              isPageAnimating ? null : callback(value),
+          children: days,
         ),
       ),
     );

@@ -59,59 +59,59 @@ class _DayPageState extends State<DayPage> {
 
   @override
   Widget build(BuildContext context) {
+    createHours();
     Size size = MediaQuery.of(context).size;
 
     return Container(
-        color: CustomColors().secondaryBkg,
-        alignment: Alignment.topCenter,
-        child: Expanded(
-          child: ListView.builder(
-            controller: controller,
-            itemCount: hours.length,
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              double scale = 1.0;
-              if (topContainer > 0) {
-                if (index == 0) {
-                  scale = index + 1 - topContainer;
-                } else if (index == 1) {
-                  scale = index + 0.5 - topContainer;
-                } else if (index == 2) {
-                  scale = index + 0.1 - topContainer;
-                } else if (index == 3) {
-                  scale = index - 0.4 - topContainer;
-                } else if (index == 4) {
-                  scale = index - 0.7 - topContainer;
-                } else {
-                  scale = index - 1 - topContainer;
-                }
-                if (scale < 0) {
-                  scale = 0;
-                } else if (scale > 1) {
-                  scale = 1;
-                }
-              }
-              return Opacity(
-                opacity: scale,
-                child: Transform(
-                  transform: Matrix4.identity()..scale(scale, scale),
-                  alignment: Alignment.bottomCenter,
-                  child: Align(
-                    heightFactor: heightFactor,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 40,
-                          child: Container(color: Colors.transparent),
-                        ),
-                        hours[index],
-                      ],
+      color: CustomColors().secondaryBkg,
+      alignment: Alignment.topCenter,
+      child: ListView.builder(
+        controller: controller,
+        itemCount: hours.length,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+          double scale = 1.0;
+          if (topContainer > 0) {
+            if (index == 0) {
+              scale = index + 1 - topContainer;
+            } else if (index == 1) {
+              scale = index + 0.5 - topContainer;
+            } else if (index == 2) {
+              scale = index + 0.1 - topContainer;
+            } else if (index == 3) {
+              scale = index - 0.4 - topContainer;
+            } else if (index == 4) {
+              scale = index - 0.7 - topContainer;
+            } else {
+              scale = index - 1 - topContainer;
+            }
+            if (scale < 0) {
+              scale = 0;
+            } else if (scale > 1) {
+              scale = 1;
+            }
+          }
+          return Opacity(
+            opacity: scale,
+            child: Transform(
+              transform: Matrix4.identity()..scale(scale, scale),
+              alignment: Alignment.bottomCenter,
+              child: Align(
+                heightFactor: heightFactor,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 40,
+                      child: Container(color: Colors.transparent),
                     ),
-                  ),
+                    hours[index],
+                  ],
                 ),
-              );
-            },
-          ),
-        ));
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
