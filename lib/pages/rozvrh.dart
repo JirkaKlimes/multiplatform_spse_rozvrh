@@ -45,11 +45,11 @@ class RozvrhPageState extends State<RozvrhPage> {
     if (widget.data.isEmpty) {
       return Scaffold(backgroundColor: CustomColors().secondaryBkg);
     } else {
-      return Scaffold(
-        backgroundColor: CustomColors().primaryBkg,
-        body: Column(
-          children: [datePicker, weekView],
-        ),
+      return Column(
+        children: [
+          datePicker,
+          weekView,
+        ],
       );
     }
   }

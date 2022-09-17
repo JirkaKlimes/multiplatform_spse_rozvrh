@@ -29,15 +29,17 @@ class Hour extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      height: 100,
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.6),
-              blurRadius: 6,
-              offset: const Offset(0, 5),),
+            color: Colors.black.withOpacity(0.6),
+            blurRadius: 6,
+            spreadRadius: 3,
+          ),
         ],
       ),
       child: SizedBox(
@@ -134,7 +136,8 @@ class Hour extends StatelessWidget {
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText,
+                borderRadius: BorderRadius.circular(4)),
           ),
         ),
         Icon(Icons.fastfood, color: CustomColors().primaryText, size: 50),
@@ -143,7 +146,8 @@ class Hour extends StatelessWidget {
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText,
+                borderRadius: BorderRadius.circular(4)),
           ),
         ),
         const SizedBox(
@@ -246,7 +250,8 @@ class Hour extends StatelessWidget {
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText,
+                borderRadius: BorderRadius.circular(4)),
           ),
         ),
         Icon(Icons.delete, color: CustomColors().primaryText, size: 50),
@@ -255,7 +260,8 @@ class Hour extends StatelessWidget {
           height: 7,
           child: Container(
             decoration: BoxDecoration(
-                color: CustomColors().primaryText, borderRadius: BorderRadius.circular(4)),
+                color: CustomColors().primaryText,
+                borderRadius: BorderRadius.circular(4)),
           ),
         ),
         const SizedBox(

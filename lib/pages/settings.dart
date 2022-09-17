@@ -14,6 +14,7 @@ class _SettingsPageState extends State<StatefulWidget> {
         appBar: AppBar(
           title: const Text('Nastavení'),
           backgroundColor: CustomColors().primaryBkg,
+          elevation: 0,
           leading: IconButton(
               onPressed: () => Navigator.pop(context),
               icon: const Icon(Icons.arrow_back_ios)),
@@ -45,19 +46,25 @@ class _SettingsPageState extends State<StatefulWidget> {
                       SizedBox(
                         width: 270,
                         child: TextFormField(
-                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: CustomColors().primaryText),
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: CustomColors().primaryText),
                           textAlign: TextAlign.left,
                           initialValue: SharedPrefs().username,
-                          onChanged: (value) => {SharedPrefs().username = value},
+                          onChanged: (value) =>
+                              {SharedPrefs().username = value},
                           decoration: InputDecoration.collapsed(
                             hintText: "Zadejte jméno na intranet...",
-                            hintStyle: TextStyle(fontSize: 18, color: CustomColors().primaryText),
+                            hintStyle: TextStyle(
+                                fontSize: 18,
+                                color: CustomColors().primaryText),
                           ),
                         ),
                       ),
                     ],
                   ),
-                Container()
+                  Container()
                 ],
               ),
             ),

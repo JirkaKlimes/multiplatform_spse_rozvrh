@@ -10,6 +10,16 @@ class WeekView extends StatelessWidget {
 
   WeekView(this.selected, this.data, this.callback, this.pageController);
 
+  List<DayPage> createDays() {
+    return [
+      DayPage(data, 0),
+      DayPage(data, 1),
+      DayPage(data, 2),
+      DayPage(data, 3),
+      DayPage(data, 4)
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     var cont = Expanded(
@@ -18,13 +28,7 @@ class WeekView extends StatelessWidget {
         child: PageView(
           controller: pageController,
           onPageChanged: (value) => isPageAnimating ? null : callback(value),
-          children: [
-            DayPage(data, 0),
-            DayPage(data, 1),
-            DayPage(data, 2),
-            DayPage(data, 3),
-            DayPage(data, 4)
-          ],
+          children: createDays(),
         ),
       ),
     );
