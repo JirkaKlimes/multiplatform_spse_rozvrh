@@ -49,7 +49,7 @@ class DatePicker extends StatelessWidget {
                   color: selected == index
                       ? CustomColors().selectedDay
                       : Colors.transparent,
-                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               width: ((width - 2 * 12) / 5),
               child: Column(
                 children: [

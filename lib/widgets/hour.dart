@@ -23,9 +23,11 @@ class Hour extends StatelessWidget {
   late double height;
   late bool isTeacher;
   late bool isRoom;
+  late bool highlighted;
 
   @override
-  Hour(this.data, this.hourIndex, this.dayIndex, this.height, {super.key});
+  Hour(this.data, this.hourIndex, this.dayIndex, this.height,
+      {this.highlighted = false, super.key});
 
   Widget hourFrame(BuildContext context, Color color, List<Widget> children) {
     double width = MediaQuery.of(context).size.width;
@@ -51,21 +53,47 @@ class Hour extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
-              width: 12,
+              width: 6,
             ),
             SizedBox(
-              height: 30,
               width: 20,
-              child: Container(
-                color: Colors.transparent,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '$hourIndex',
-                  style: TextStyle(
-                      color: CustomColors().primaryText,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  highlighted
+                      ? Column(
+                          children: [
+                            SizedBox(
+                              height: 8,
+                              width: 8,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: CustomColors().currentHour,
+                              )),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                          ],
+                        )
+                      : 
+                      const SizedBox(),
+                      SizedBox(
+                          width: 8,
+                          child: Container(
+                            color: Colors.transparent,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '$hourIndex',
+                              style: TextStyle(
+                                  color: CustomColors().primaryText,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
+                          ),
+                        ),
+                ],
               ),
             ),
             SizedBox(

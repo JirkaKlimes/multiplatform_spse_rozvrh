@@ -12,6 +12,7 @@ class CustomColors {
   late Color primaryText;
   late Color secondaryText;
   late Color currentDay;
+  late Color currentHour;
 
   CustomColors() {
     switch (SharedPrefs().theme) {
@@ -26,6 +27,7 @@ class CustomColors {
         primaryText = const Color.fromARGB(255, 255, 255, 255);
         secondaryText = const Color.fromARGB(255, 0, 0, 0);
         currentDay = const Color.fromARGB(255, 0, 255, 0);
+        currentHour = const Color.fromARGB(255, 0, 255, 0);
         break;
 
       case "light":
@@ -40,6 +42,7 @@ class CustomColors {
         primaryText = const Color.fromARGB(255, 0, 0, 0);
         secondaryText = const Color.fromARGB(255, 0, 0, 0);
         currentDay = const Color.fromARGB(255, 0, 255, 0);
+        currentHour = const Color.fromARGB(255, 0, 255, 0);
         break;
     }
   }

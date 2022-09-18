@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
 
 
     Timer.periodic(const Duration(seconds: 60), (timer) {
-    _key.currentState?.refresh();
+    _key.currentState?.getData();
     });
 
 

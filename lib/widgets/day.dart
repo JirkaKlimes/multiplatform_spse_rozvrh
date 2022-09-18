@@ -42,7 +42,15 @@ class _DayPageState extends State<DayPage> {
       hours = List.empty(growable: true);
 
       for (int i = firstHour; i <= lastHour; i++) {
-        hours.add(Hour(widget.data, i, widget.dayIndex, hourHeight));
+        hours.add(
+          Hour(
+            widget.data,
+            i,
+            widget.dayIndex,
+            hourHeight,
+            // highlighted: i == 2,
+          ),
+        );
       }
       return;
     }
