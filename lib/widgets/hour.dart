@@ -27,7 +27,7 @@ class Hour extends StatelessWidget {
 
   @override
   Hour(this.data, this.hourIndex, this.dayIndex, this.height,
-      {this.highlighted = false, super.key});
+      {super.key, this.highlighted = false});
 
   Widget hourFrame(BuildContext context, Color color, List<Widget> children) {
     double width = MediaQuery.of(context).size.width;
@@ -40,7 +40,7 @@ class Hour extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.6),
+            color: CustomColors().shadows,
             blurRadius: 6,
             spreadRadius: 3,
           ),
@@ -77,22 +77,21 @@ class Hour extends StatelessWidget {
                             ),
                           ],
                         )
-                      : 
-                      const SizedBox(),
-                      SizedBox(
-                          width: 8,
-                          child: Container(
-                            color: Colors.transparent,
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '$hourIndex',
-                              style: TextStyle(
-                                  color: CustomColors().primaryText,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
-                            ),
-                          ),
-                        ),
+                      : const SizedBox(),
+                  SizedBox(
+                    width: 8,
+                    child: Container(
+                      color: Colors.transparent,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '$hourIndex',
+                        style: TextStyle(
+                            color: CustomColors().primaryText,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -188,17 +187,11 @@ class Hour extends StatelessWidget {
   }
 
   Widget changedHour(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return hourFrame(
       context,
       CustomColors().changedHour,
       [
-        // const SizedBox(
-        // width: 5,
-        // ),
         SizedBox(
-          // width: 80,
           child: Container(
             color: Colors.transparent,
             child: Text(
@@ -210,11 +203,7 @@ class Hour extends StatelessWidget {
             ),
           ),
         ),
-        // const SizedBox(
-        //   width: 5,
-        // ),
         SizedBox(
-          // width: 80,
           child: Container(
             color: Colors.transparent,
             child: Column(
@@ -239,11 +228,7 @@ class Hour extends StatelessWidget {
             ),
           ),
         ),
-        // const SizedBox(
-        // width: 10,
-        // ),
         SizedBox(
-          // width: 80,
           child: Container(
             color: Colors.transparent,
             child: Column(
@@ -312,11 +297,7 @@ class Hour extends StatelessWidget {
       context,
       CustomColors().normalHour,
       [
-        // const SizedBox(
-        // width: 5,
-        // ),
         SizedBox(
-          // width: 80,
           child: Container(
             color: Colors.transparent,
             child: Text(
@@ -328,11 +309,7 @@ class Hour extends StatelessWidget {
             ),
           ),
         ),
-        // const SizedBox(
-        //   width: 5,
-        // ),
         SizedBox(
-          // width: 80,
           child: Container(
             color: Colors.transparent,
             child: Column(
@@ -357,11 +334,7 @@ class Hour extends StatelessWidget {
             ),
           ),
         ),
-        // const SizedBox(
-        // width: 10,
-        // ),
         SizedBox(
-          // width: 80,
           child: Container(
             color: Colors.transparent,
             child: Column(
@@ -392,7 +365,6 @@ class Hour extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Map day = data['items'][dayIndex];
     var day = data['items'][dayIndex];
 
     if (day is List) {

@@ -7,28 +7,39 @@ import 'package:spse_rozvrh/utils/colorTheme.dart';
 class HomePage extends StatelessWidget {
   final GlobalKey<RozvrhPageState> _key = GlobalKey();
 
+  double toolbarHeight = 60;
+
   @override
   Widget build(BuildContext context) {
     RozvrhPage rozvrhpage = RozvrhPage(key: _key);
 
-
     Timer.periodic(const Duration(seconds: 60), (timer) {
-    _key.currentState?.getData();
+      _key.currentState?.getData();
     });
-
 
     Scaffold scaffold = Scaffold(
         appBar: AppBar(
-          title: const Text('Rozvrh Hodin'),
+          title: Text(
+            'Rozvrh hodin',
+            style: TextStyle(fontSize: toolbarHeight * 0.4),
+          ),
           backgroundColor: CustomColors().primaryBkg,
-          toolbarHeight: 68,
+          toolbarHeight: toolbarHeight,
           elevation: 0,
+          leading: IconButton(
+              onPressed: null,
+              icon: Icon(
+                Icons.menu,
+                color: CustomColors().primaryText,
+                size: toolbarHeight * 0.4,
+              )),
           actions: [
             IconButton(
                 onPressed: () => _key.currentState!.refresh(),
                 icon: Icon(
-                  Icons.refresh,
+                  Icons.update,
                   color: CustomColors().primaryText,
+                  size: toolbarHeight * 0.4,
                 )),
             IconButton(
                 onPressed: (() => {
@@ -38,14 +49,15 @@ class HomePage extends StatelessWidget {
                               builder: (context) => SettingsPage()))
                     }),
                 icon: Icon(
-                  Icons.more_vert,
+                  Icons.settings,
                   color: CustomColors().primaryText,
+                  size: toolbarHeight * 0.4,
                 )),
           ],
         ),
         backgroundColor: CustomColors().primaryBkg,
         body: rozvrhpage);
-    
+
     return scaffold;
   }
 }

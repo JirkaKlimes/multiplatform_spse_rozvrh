@@ -2,26 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/widgets/day.dart';
 
-class WeekView extends StatelessWidget {
+class WeekView extends StatefulWidget {
   Map data;
   int selected;
   Function callback;
   PageController pageController;
 
-  WeekView(this.selected, this.data, this.callback, this.pageController);
+  WeekView(this.selected, this.data, this.callback, this.pageController,
+      {super.key});
 
+  @override
+  State<WeekView> createState() => WeekViewState();
+}
+
+class WeekViewState extends State<WeekView> {
   bool isPageAnimating = false;
 
   late List<Widget> days;
 
   void createDayWidgets() {
-    days = [
-      DayPage(data, 0),
-      DayPage(data, 1),
-      DayPage(data, 2),
-      DayPage(data, 3),
-      DayPage(data, 4)
-    ];
+    List<Widget> tempDays = List.empty(growable: true);
+    for (int i = 0; i < 6; i++) {
+      if (DateTime.now().weekday - 1 == i) {
+        tempDays.add(DayPage(
+          widget.data,
+          i,
+        ));
+      }
+      tempDays.add(DayPage(widget.data, i));
+    }
+    days = tempDays;
+  }
+
+  void onPageChanged(value) {
+    isPageAnimating ? null : widget.callback(value);
   }
 
   @override
@@ -32,23 +46,25 @@ class WeekView extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: CustomColors().secondaryBkg),
         child: PageView(
-          controller: pageController,
+          controller: widget.pageController,
           physics: const BouncingScrollPhysics(),
-          onPageChanged: (value) => isPageAnimating ? null : callback(value),
+          onPageChanged: onPageChanged,
           children: days,
         ),
       ),
     );
 
-    if (pageController.hasClients) {
+    if (widget.pageController.hasClients) {
       isPageAnimating = true;
-      pageController
-          .animateToPage(selected,
+      widget.pageController
+          .animateToPage(widget.selected,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut)
-          .then((_) {
-        isPageAnimating = false;
-      });
+          .then(
+        (_) {
+          isPageAnimating = false;
+        },
+      );
     }
     return cont;
   }

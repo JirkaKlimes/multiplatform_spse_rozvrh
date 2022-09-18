@@ -8,6 +8,7 @@ import 'package:spse_rozvrh/widgets/day_picker.dart';
 import 'package:spse_rozvrh/widgets/week_view.dart';
 
 class RozvrhPage extends StatefulWidget {
+  final GlobalKey<WeekViewState> _key = GlobalKey<WeekViewState>();
   RozvrhPage({Key? key}) : super(key: key);
 
   @override
@@ -38,16 +39,25 @@ class RozvrhPageState extends State<RozvrhPage> {
       refresh();
     }
 
-    DatePicker datePicker =
-        DatePicker(widget.selected, widget.data, changeSelected);
+    DatePicker dayPicker = DatePicker(
+      widget.selected,
+      widget.data,
+      changeSelected,
+    );
+
     WeekView weekView = WeekView(
-        widget.selected, widget.data, changeSelected, widget.pageController);
+      widget.selected,
+      widget.data,
+      changeSelected,
+      widget.pageController,
+    );
+
     if (widget.data.isEmpty) {
       return Scaffold(backgroundColor: CustomColors().secondaryBkg);
     } else {
       return Column(
         children: [
-          datePicker,
+          dayPicker,
           weekView,
         ],
       );

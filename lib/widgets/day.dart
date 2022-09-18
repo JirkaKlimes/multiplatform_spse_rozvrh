@@ -3,26 +3,54 @@ import 'package:spse_rozvrh/widgets/hour.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
 
 class DayPage extends StatefulWidget {
+  DayPage(this.data, this.dayIndex, {Key? key}) : super(key: key);
+
   Map data;
   int dayIndex;
 
   @override
-  DayPage(this.data, this.dayIndex);
-
-  @override
-  State<DayPage> createState() => _DayPageState();
+  State<DayPage> createState() => DayPageState();
 }
 
-class _DayPageState extends State<DayPage> {
+class DayPageState extends State<DayPage> {
   double heightFactor = 0.65;
   double hourHeight = 110;
   double spacerHeight = 30;
+  late int firstHour;
+  late int currentHourIndex = 0;
 
-  double get realHourHeight => (hourHeight + spacerHeight) * heightFactor;
+  double get fullHourHeight => (hourHeight + spacerHeight) * heightFactor;
 
-  ScrollController controller = ScrollController();
+  late ScrollController controller;
 
   late List<Hour> hours;
+
+  bool isCurrent(index) {
+    if ((DateTime.now().weekday - 1) == widget.dayIndex) {
+      Map hourData = widget.data['hours'][index];
+      List timeFrom = hourData['from'].split(':');
+      List timeTo = hourData['to'].split(':');
+      int breakTime = hourData['break'];
+
+      int from = Duration(
+              hours: int.parse(timeFrom[0]),
+              minutes: int.parse(timeFrom[1]) - breakTime)
+          .inMinutes;
+      int to =
+          Duration(hours: int.parse(timeTo[0]), minutes: int.parse(timeTo[1]))
+              .inMinutes;
+
+      int now =
+          Duration(hours: DateTime.now().hour, minutes: DateTime.now().minute)
+              .inMinutes;
+
+      if (now > from && now < to) {
+        currentHourIndex = index - firstHour;
+        return true;
+      }
+    }
+    return false;
+  }
 
   createHours() {
     var day = widget.data['items'][widget.dayIndex];
@@ -36,7 +64,7 @@ class _DayPageState extends State<DayPage> {
     }
 
     if (day != null) {
-      int firstHour = int.parse(day.entries.first.key);
+      firstHour = int.parse(day.entries.first.key);
       int lastHour = int.parse(day.entries.last.key);
 
       hours = List.empty(growable: true);
@@ -48,12 +76,13 @@ class _DayPageState extends State<DayPage> {
             i,
             widget.dayIndex,
             hourHeight,
-            // highlighted: i == 2,
+            highlighted: isCurrent(i),
           ),
         );
       }
       return;
     }
+    currentHourIndex = 0;
     hours = List.empty();
   }
 
@@ -61,6 +90,8 @@ class _DayPageState extends State<DayPage> {
   void initState() {
     super.initState();
     createHours();
+    controller = ScrollController(
+        initialScrollOffset: currentHourIndex * fullHourHeight);
     controller.addListener(() {
       setState(() {});
     });
@@ -69,7 +100,6 @@ class _DayPageState extends State<DayPage> {
   @override
   Widget build(BuildContext context) {
     createHours();
-    Size size = MediaQuery.of(context).size;
 
     return Container(
       color: CustomColors().secondaryBkg,
@@ -79,9 +109,9 @@ class _DayPageState extends State<DayPage> {
         itemCount: hours.length,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-          final double itemPos = index * realHourHeight;
+          final double itemPos = index * fullHourHeight;
           final double difference = controller.offset - itemPos;
-          double opacity = 1 - (difference / realHourHeight);
+          double opacity = 1 - (difference / fullHourHeight);
           double scale = opacity;
           if (opacity > 1.0) opacity = 1.0;
           if (opacity < 0.0) opacity = 0.0;
