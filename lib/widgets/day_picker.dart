@@ -84,8 +84,10 @@ class DatePicker extends StatelessWidget {
                               width: 40,
                               height: 4,
                               child: Container(
-                                color: CustomColors().primaryText,
-                              ),
+                                  decoration: BoxDecoration(
+                                      color: CustomColors().primaryText,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(2)))),
                             ),
                           ],
                         ),

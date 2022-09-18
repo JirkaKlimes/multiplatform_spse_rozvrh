@@ -161,10 +161,14 @@ class Hour extends StatelessWidget {
 
   Widget changedHour(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
     return hourFrame(
       context,
       CustomColors().changedHour,
       [
+        // const SizedBox(
+        // width: 5,
+        // ),
         SizedBox(
           // width: 80,
           child: Container(
@@ -190,7 +194,7 @@ class Hour extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.meeting_room_sharp,
+                  isRoom ? Icons.groups : Icons.meeting_room_sharp,
                   color: CustomColors().primaryText,
                 ),
                 const SizedBox(
@@ -219,7 +223,7 @@ class Hour extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  isTeacher ? Icons.groups : Icons.person,
+                  (isTeacher && !isRoom) ? Icons.groups : Icons.person,
                   color: CustomColors().primaryText,
                 ),
                 const SizedBox(
