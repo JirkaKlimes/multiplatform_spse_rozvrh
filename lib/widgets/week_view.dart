@@ -22,7 +22,7 @@ class WeekViewState extends State<WeekView> {
 
   void createDayWidgets() {
     List<Widget> tempDays = List.empty(growable: true);
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 5; i++) {
       if (DateTime.now().weekday - 1 == i) {
         tempDays.add(DayPage(
           widget.data,
