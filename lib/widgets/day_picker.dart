@@ -26,13 +26,12 @@ class DatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     double width = MediaQuery.of(context).size.width;
 
     return Container(
         height: 100,
         padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
             color: CustomColors().secondaryBkg,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(28),
@@ -59,19 +58,37 @@ class DatePicker extends StatelessWidget {
                   ),
                   Text(daylist[index],
                       style: TextStyle(
-                          color: selected == index ? CustomColors().secondaryText : CustomColors().primaryText,
+                          color: selected == index
+                              ? CustomColors().secondaryText
+                              : CustomColors().primaryText,
                           fontSize: 18,
                           fontWeight: FontWeight.bold)),
                   const SizedBox(
                     height: 8,
                   ),
-                  // Text('$index',
-                  Text(
-                      '${DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).month - 1]}',
-                      style: TextStyle(
-                          color: selected == index ? CustomColors().secondaryText : CustomColors().primaryText,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold)),
+                  data['days'] != null
+                      ? Text(
+                          '${DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).month - 1]}',
+                          style: TextStyle(
+                              color: selected == index
+                                  ? CustomColors().secondaryText
+                                  : CustomColors().primaryText,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold))
+                      : Column(
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              width: 40,
+                              height: 4,
+                              child: Container(
+                                color: CustomColors().primaryText,
+                              ),
+                            ),
+                          ],
+                        ),
                   const SizedBox(
                     height: 5,
                   ),

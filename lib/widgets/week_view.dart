@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spse_rozvrh/utils/colorTheme.dart';
 import 'package:spse_rozvrh/widgets/day.dart';
 
 class WeekView extends StatelessWidget {
@@ -29,11 +30,11 @@ class WeekView extends StatelessWidget {
 
     var cont = Expanded(
       child: Container(
-        decoration: const BoxDecoration(color: Colors.transparent),
+        decoration: BoxDecoration(color: CustomColors().secondaryBkg),
         child: PageView(
           controller: pageController,
-          onPageChanged: (value) =>
-              isPageAnimating ? null : callback(value),
+          physics: const BouncingScrollPhysics(),
+          onPageChanged: (value) => isPageAnimating ? null : callback(value),
           children: days,
         ),
       ),
@@ -43,7 +44,8 @@ class WeekView extends StatelessWidget {
       isPageAnimating = true;
       pageController
           .animateToPage(selected,
-              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut)
           .then((_) {
         isPageAnimating = false;
       });

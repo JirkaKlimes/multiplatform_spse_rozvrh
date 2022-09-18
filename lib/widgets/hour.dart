@@ -17,19 +17,21 @@ class Hour extends StatelessWidget {
   late String endTime;
   late String subject;
   late String teacherOrCls;
-  late String room;
+  late String cls;
+  late String roomOrCls;
   late String change;
-
+  late double height;
   late bool isTeacher;
+  late bool isRoom;
 
   @override
-  Hour(this.data, this.hourIndex, this.dayIndex, {super.key});
+  Hour(this.data, this.hourIndex, this.dayIndex, this.height, {super.key});
 
   Widget hourFrame(BuildContext context, Color color, List<Widget> children) {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: 100,
+      height: height - 10,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         color: color,
@@ -168,7 +170,7 @@ class Hour extends StatelessWidget {
           child: Container(
             color: Colors.transparent,
             child: Text(
-              subject,
+              subject.replaceAll('(', '').replaceAll(')', ''),
               style: TextStyle(
                   color: CustomColors().primaryText,
                   fontWeight: FontWeight.bold,
@@ -195,7 +197,7 @@ class Hour extends StatelessWidget {
                   height: 15,
                 ),
                 Text(
-                  room.replaceAll('(', '').replaceAll(')', ''),
+                  roomOrCls.replaceAll('(', '').replaceAll(')', ''),
                   style: TextStyle(
                       color: CustomColors().primaryText,
                       fontWeight: FontWeight.bold,
@@ -286,7 +288,7 @@ class Hour extends StatelessWidget {
           child: Container(
             color: Colors.transparent,
             child: Text(
-              subject,
+              subject.replaceAll('(', '').replaceAll(')', ''),
               style: TextStyle(
                   color: CustomColors().primaryText,
                   fontWeight: FontWeight.bold,
@@ -306,14 +308,14 @@ class Hour extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.meeting_room_sharp,
+                  isRoom ? Icons.groups : Icons.meeting_room_sharp,
                   color: CustomColors().primaryText,
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 Text(
-                  room.replaceAll('(', '').replaceAll(')', ''),
+                  roomOrCls.replaceAll('(', '').replaceAll(')', ''),
                   style: TextStyle(
                       color: CustomColors().primaryText,
                       fontWeight: FontWeight.bold,
@@ -335,7 +337,7 @@ class Hour extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  isTeacher ? Icons.groups : Icons.person,
+                  (isTeacher && !isRoom) ? Icons.groups : Icons.person,
                   color: CustomColors().primaryText,
                 ),
                 const SizedBox(
@@ -375,11 +377,12 @@ class Hour extends StatelessWidget {
     if (day.containsKey('$hourIndex')) {
       Map hour = day['$hourIndex'][0];
       subject = hour['subject'];
-      room = hour['room'];
+      roomOrCls = hour.containsKey('room') ? hour['room'] : hour['cls'];
       teacherOrCls =
           hour.containsKey('teacher') ? hour['teacher'] : hour['cls'];
-      change = hour['change'];
+      change = hour.containsKey('change') ? hour['change'] : 'none';
       isTeacher = hour.containsKey('cls') ? true : false;
+      isRoom = hour.containsKey('room') ? false : true;
     }
     if (day.containsKey('$hourIndex')) {
       if (change == "none") {

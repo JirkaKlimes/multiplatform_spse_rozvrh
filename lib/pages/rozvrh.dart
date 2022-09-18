@@ -92,6 +92,8 @@ class RozvrhPageState extends State<RozvrhPage> {
   }
 
   void refresh() {
+    widget.selected =
+        (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1);
     getData();
   }
 }

@@ -14,7 +14,16 @@ class DayPage extends StatefulWidget {
 }
 
 class _DayPageState extends State<DayPage> {
+  double heightFactor = 0.65;
+  double hourHeight = 110;
+  double spacerHeight = 30;
+
+  double get realHourHeight => (hourHeight + spacerHeight) * heightFactor;
+
+  ScrollController controller = ScrollController();
+
   late List<Hour> hours;
+
   createHours() {
     var day = widget.data['items'][widget.dayIndex];
 
@@ -33,27 +42,19 @@ class _DayPageState extends State<DayPage> {
       hours = List.empty(growable: true);
 
       for (int i = firstHour; i <= lastHour; i++) {
-        hours.add(Hour(widget.data, i, widget.dayIndex));
+        hours.add(Hour(widget.data, i, widget.dayIndex, hourHeight));
       }
       return;
     }
     hours = List.empty();
   }
 
-  double topContainer = 0;
-  double heightFactor = 0.6;
-
-  ScrollController controller = ScrollController();
-
   @override
   void initState() {
     super.initState();
     createHours();
     controller.addListener(() {
-      double value = controller.offset / 100 * heightFactor;
-      setState(() {
-        topContainer = value;
-      });
+      setState(() {});
     });
   }
 
@@ -70,29 +71,16 @@ class _DayPageState extends State<DayPage> {
         itemCount: hours.length,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-          double scale = 1.0;
-          if (topContainer > 0) {
-            if (index == 0) {
-              scale = index + 1 - topContainer;
-            } else if (index == 1) {
-              scale = index + 0.5 - topContainer;
-            } else if (index == 2) {
-              scale = index + 0.1 - topContainer;
-            } else if (index == 3) {
-              scale = index - 0.4 - topContainer;
-            } else if (index == 4) {
-              scale = index - 0.7 - topContainer;
-            } else {
-              scale = index - 1 - topContainer;
-            }
-            if (scale < 0) {
-              scale = 0;
-            } else if (scale > 1) {
-              scale = 1;
-            }
-          }
+          final double itemPos = index * realHourHeight;
+          final double difference = controller.offset - itemPos;
+          double opacity = 1 - (difference / realHourHeight);
+          double scale = opacity;
+          if (opacity > 1.0) opacity = 1.0;
+          if (opacity < 0.0) opacity = 0.0;
+          if (scale > 1.0) scale = 1.0;
+
           return Opacity(
-            opacity: scale,
+            opacity: opacity,
             child: Transform(
               transform: Matrix4.identity()..scale(scale, scale),
               alignment: Alignment.bottomCenter,
@@ -101,7 +89,7 @@ class _DayPageState extends State<DayPage> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 40,
+                      height: spacerHeight,
                       child: Container(color: Colors.transparent),
                     ),
                     hours[index],
