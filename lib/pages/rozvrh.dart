@@ -25,11 +25,31 @@ class RozvrhPage extends StatefulWidget {
           (DateTime.now().weekday - 1) > 4 ? 0 : (DateTime.now().weekday - 1));
 }
 
-class RozvrhPageState extends State<RozvrhPage> {
+class RozvrhPageState extends State<RozvrhPage> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   void changeSelected(index) {
     setState(() {
       widget.selected = index;
     });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      refresh();
+    }
   }
 
   @override
