@@ -13,21 +13,23 @@ class CustomColors {
   late Color secondaryText;
   late Color currentDay;
   late Color currentHour;
+  late Color shadows;
 
   CustomColors() {
     switch (SharedPrefs().theme) {
       case "dark":
-        primaryBkg = const Color.fromARGB(255, 32, 44, 57);
-        secondaryBkg = const Color.fromARGB(255, 184, 176, 141);
-        normalHour = const Color.fromARGB(255, 40, 56, 69);
-        changedHour = const Color.fromARGB(255, 242, 149, 89);
-        freeHour = const Color.fromARGB(255, 88, 77, 53);
-        droppedHour = const Color.fromARGB(255, 88, 77, 53);
-        selectedDay = const Color.fromARGB(255, 154, 148, 118);
+        primaryBkg = const Color.fromARGB(255, 20, 24, 43);
+        secondaryBkg = const Color.fromARGB(255, 9, 12, 28);
+        normalHour = const Color.fromARGB(255, 20, 24, 43);
+        changedHour = const Color.fromARGB(255, 226, 118, 74);
+        freeHour = const Color.fromARGB(255, 91, 231, 154);
+        droppedHour = const Color.fromARGB(255, 91, 231, 154);
+        selectedDay = const Color.fromARGB(255, 66, 28, 255);
         primaryText = const Color.fromARGB(255, 255, 255, 255);
-        secondaryText = const Color.fromARGB(255, 0, 0, 0);
+        secondaryText = const Color.fromARGB(255, 255, 255, 255);
         currentDay = const Color.fromARGB(255, 0, 255, 0);
         currentHour = const Color.fromARGB(255, 0, 255, 0);
+        shadows = const Color.fromARGB(255, 65, 124, 255).withOpacity(0.3);
         break;
 
       case "light":
@@ -43,6 +45,7 @@ class CustomColors {
         secondaryText = const Color.fromARGB(255, 0, 0, 0);
         currentDay = const Color.fromARGB(255, 0, 255, 0);
         currentHour = const Color.fromARGB(255, 0, 255, 0);
+        shadows = const Color.fromARGB(255, 0, 0, 0).withOpacity(0.6);
         break;
     }
   }

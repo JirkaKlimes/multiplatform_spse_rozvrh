@@ -26,7 +26,7 @@ class SharedPrefs {
     _sharedPrefs.setString('encodedData', data);
   }
 
-  String get theme => _sharedPrefs.getString('theme') ?? "light";
+  String get theme => _sharedPrefs.getString('theme') ?? "dark";
   set theme(String value) {
     _sharedPrefs.setString('theme', value);
   }
