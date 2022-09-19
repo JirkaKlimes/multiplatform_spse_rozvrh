@@ -201,6 +201,7 @@ class Hour extends StatelessWidget {
           height: 7,
           child: Container(
             decoration: BoxDecoration(
+                // color: CustomColors().freeHourText,
                 color: CustomColors().freeHourText,
                 borderRadius: BorderRadius.circular(4)),
           ),
