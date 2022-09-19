@@ -18,6 +18,8 @@ class CustomColors {
   late Color currentDay;
   late Color currentHour;
   late Color shadows;
+  late Color live;
+  late Color notLive;
 
   CustomColors() {
     switch (SharedPrefs().theme) {
@@ -38,6 +40,8 @@ class CustomColors {
         currentDay = const Color.fromARGB(255, 0, 255, 0);
         currentHour = const Color.fromARGB(255, 0, 255, 0);
         shadows = const Color.fromARGB(255, 82, 137, 255).withOpacity(0.2);
+        live = const Color.fromARGB(255, 0, 255, 0);
+        notLive = const Color.fromARGB(255, 255, 0, 0);
         break;
 
       case "light":
@@ -57,6 +61,8 @@ class CustomColors {
         currentDay = const Color.fromARGB(255, 0, 255, 0);
         currentHour = const Color.fromARGB(255, 0, 255, 0);
         shadows = const Color.fromARGB(255, 0, 0, 0).withOpacity(0.3);
+        live = const Color.fromARGB(255, 0, 255, 0);
+        notLive = const Color.fromARGB(255, 255, 0, 0);
         break;
     }
   }

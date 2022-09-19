@@ -16,7 +16,7 @@ class SharedPrefs {
     _sharedPrefs.setString('username', value);
   }
 
-  int get lastUpdateTime => _sharedPrefs.getInt('lastUpdateTime') ?? 0;
+  int get lastUpdateTime => _sharedPrefs.getInt('lastUpdateTime') ?? DateTime.now().millisecondsSinceEpoch;
   set lastUpdateTime(int value) {
     _sharedPrefs.setInt('lastupdatetime', value);
   }
