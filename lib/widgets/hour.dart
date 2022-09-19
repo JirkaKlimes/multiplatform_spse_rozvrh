@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class Hour extends StatelessWidget {
+  void searchTeacher(String teacher) async {
+    if (isTeacher) {
+      Uri url = Uri.parse(
+          'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fwww.spse.cz%2F+inurl%3Azamestnanec.php+%22$teacher%22');
+      var urllaunchable = await canLaunchUrl(url);
+      if (urllaunchable) {
+        launchUrl(url);
+      }
+    }
+  }
+
   Map data;
   int hourIndex;
   int dayIndex;
@@ -187,6 +199,8 @@ class Hour extends StatelessWidget {
   }
 
   Widget changedHour(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return hourFrame(
       context,
       CustomColors().changedHour,
@@ -211,7 +225,7 @@ class Hour extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  isRoom ? Icons.groups : Icons.meeting_room_sharp,
+                  isRoom ? Icons.meeting_room_sharp : Icons.groups,
                   color: CustomColors().primaryText,
                 ),
                 const SizedBox(
@@ -228,28 +242,31 @@ class Hour extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          child: Container(
-            color: Colors.transparent,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  (isTeacher && !isRoom) ? Icons.groups : Icons.person,
-                  color: CustomColors().primaryText,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  teacherOrCls,
-                  style: TextStyle(
-                      color: CustomColors().primaryText,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
-                )
-              ],
+        GestureDetector(
+          onLongPress: () => searchTeacher(teacherOrCls),
+          child: SizedBox(
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    (!isTeacher && isRoom) ? Icons.groups : Icons.person,
+                    color: CustomColors().primaryText,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    teacherOrCls,
+                    style: TextStyle(
+                        color: CustomColors().primaryText,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22),
+                  )
+                ],
+              ),
             ),
           ),
         )
@@ -317,7 +334,7 @@ class Hour extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  isRoom ? Icons.groups : Icons.meeting_room_sharp,
+                  isRoom ? Icons.meeting_room_sharp : Icons.groups,
                   color: CustomColors().primaryText,
                 ),
                 const SizedBox(
@@ -334,28 +351,31 @@ class Hour extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          child: Container(
-            color: Colors.transparent,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  (isTeacher && !isRoom) ? Icons.groups : Icons.person,
-                  color: CustomColors().primaryText,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  teacherOrCls,
-                  style: TextStyle(
-                      color: CustomColors().primaryText,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
-                )
-              ],
+        GestureDetector(
+          onLongPress: () => searchTeacher(teacherOrCls),
+          child: SizedBox(
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    (!isTeacher && isRoom) ? Icons.groups : Icons.person,
+                    color: CustomColors().primaryText,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    teacherOrCls,
+                    style: TextStyle(
+                        color: CustomColors().primaryText,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22),
+                  )
+                ],
+              ),
             ),
           ),
         )
@@ -385,8 +405,8 @@ class Hour extends StatelessWidget {
       teacherOrCls =
           hour.containsKey('teacher') ? hour['teacher'] : hour['cls'];
       change = hour.containsKey('change') ? hour['change'] : 'none';
-      isTeacher = hour.containsKey('cls') ? true : false;
-      isRoom = hour.containsKey('room') ? false : true;
+      isTeacher = hour.containsKey('cls') ? false : true;
+      isRoom = hour.containsKey('room') ? true : false;
     }
     if (day.containsKey('$hourIndex')) {
       if (change == "none") {

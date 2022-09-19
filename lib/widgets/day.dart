@@ -3,10 +3,10 @@ import 'package:spse_rozvrh/widgets/hour.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
 
 class DayPage extends StatefulWidget {
-  DayPage(this.data, this.dayIndex, {Key? key}) : super(key: key);
-
   Map data;
   int dayIndex;
+
+  DayPage(this.data, this.dayIndex, {Key? key}) : super(key: key);
 
   @override
   State<DayPage> createState() => DayPageState();
