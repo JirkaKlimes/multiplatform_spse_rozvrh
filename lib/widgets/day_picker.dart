@@ -29,7 +29,8 @@ class DatePicker extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-        height: 100,
+        height: 90,
+        alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
             color: CustomColors().secondaryBkg,
@@ -52,6 +53,8 @@ class DatePicker extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(20))),
               width: ((width - 2 * 12) / 5),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(
                     height: 8,

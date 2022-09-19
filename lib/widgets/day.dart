@@ -23,7 +23,7 @@ class DayPageState extends State<DayPage> {
 
   late ScrollController controller;
 
-  late List<Hour> hours;
+  late List hours;
 
   bool isCurrent(index) {
     if ((DateTime.now().weekday - 1) == widget.dayIndex) {
@@ -88,7 +88,7 @@ class DayPageState extends State<DayPage> {
     currentHourIndex = 0;
     hours = List.empty();
   }
-
+  
   @override
   void initState() {
     super.initState();
