@@ -26,13 +26,13 @@ class HomePage extends StatelessWidget {
           backgroundColor: CustomColors().primaryBkg,
           toolbarHeight: toolbarHeight,
           elevation: 0,
-          leading: IconButton(
-              onPressed: null,
-              icon: Icon(
-                Icons.menu,
-                color: CustomColors().primaryText,
-                size: toolbarHeight * 0.4,
-              )),
+          // leading: IconButton(
+          //     onPressed: null,
+          //     icon: Icon(
+          //       Icons.menu,
+          //       color: CustomColors().primaryText,
+          //       size: toolbarHeight * 0.4,
+          //     )),
           actions: [
             IconButton(
                 onPressed: () => _key.currentState!.refresh(),

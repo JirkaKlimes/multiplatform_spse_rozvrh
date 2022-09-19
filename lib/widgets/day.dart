@@ -30,12 +30,17 @@ class DayPageState extends State<DayPage> {
       Map hourData = widget.data['hours'][index];
       List timeFrom = hourData['from'].split(':');
       List timeTo = hourData['to'].split(':');
-      int breakTime = hourData['break'];
+      int breakTime = 30;
+
+      if ((widget.dayIndex - 1) >= 0) {
+        breakTime = widget.data['hours'][index]['break'];
+      }
 
       int from = Duration(
-              hours: int.parse(timeFrom[0]),
-              minutes: int.parse(timeFrom[1]) - breakTime)
-          .inMinutes;
+                  hours: int.parse(timeFrom[0]),
+                  minutes: int.parse(timeFrom[1]))
+              .inMinutes -
+          breakTime;
       int to =
           Duration(hours: int.parse(timeTo[0]), minutes: int.parse(timeTo[1]))
               .inMinutes;

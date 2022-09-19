@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:spse_rozvrh/utils/colorTheme.dart';
+
+// import 'package:html/parser.dart' show parse;
+// import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+
 
 // ignore: must_be_immutable
 class Hour extends StatelessWidget {
-  void searchTeacher(String teacher) async {
-    if (isTeacher) {
-      Uri url = Uri.parse(
-          'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fwww.spse.cz%2F+inurl%3Azamestnanec.php+%22$teacher%22');
-      var urllaunchable = await canLaunchUrl(url);
-      if (urllaunchable) {
-        launchUrl(url);
-      }
-    }
-  }
-
   Map data;
   int hourIndex;
   int dayIndex;
@@ -40,6 +33,36 @@ class Hour extends StatelessWidget {
   @override
   Hour(this.data, this.hourIndex, this.dayIndex, this.height,
       {super.key, this.highlighted = false});
+
+  void searchTeacher(String teacher) async {
+    if (isTeacher) {
+      Uri url = Uri.parse(
+          'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fwww.spse.cz%2F+inurl%3Azamestnanec.php+%22$teacher%22');
+      var urllaunchable = await canLaunchUrl(url);
+      if (urllaunchable) {
+        launchUrl(url);
+      }
+    }
+  }
+  // void searchTeacher(String teacher) async {
+  //   if (isTeacher) {
+  //     Uri url = Uri.parse(
+  //         'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fwww.spse.cz%2F+inurl%3Azamestnanec.php+%22$teacher%22');
+  //     final response = await http.get(url);
+  //     final document = parse(response.body);
+  //     if (response.statusCode == 200) {
+  //       final hrefs = document
+  //           .getElementsByTagName('a')
+  //           .where((e) => e.attributes.containsKey('href'))
+  //           .map((e) => e.attributes['href'])
+  //           .toList();
+  //       print(hrefs);
+  //     }
+  //   else {
+  //     print(response.statusCode);
+  //   }
+  //   }
+  // }
 
   Widget hourFrame(BuildContext context, Color color, List<Widget> children) {
     double width = MediaQuery.of(context).size.width;
