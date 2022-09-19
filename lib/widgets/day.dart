@@ -104,6 +104,10 @@ class DayPageState extends State<DayPage> {
   Widget build(BuildContext context) {
     createHours();
 
+    for (int i = 0; i < 5; i++){
+      hours.add(SizedBox(height: fullHourHeight));
+    }
+
     return Container(
       color: CustomColors().secondaryBkg,
       alignment: Alignment.topCenter,
