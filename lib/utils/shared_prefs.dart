@@ -18,7 +18,7 @@ class SharedPrefs {
 
   int get lastUpdateTime => _sharedPrefs.getInt('lastUpdateTime') ?? DateTime.now().millisecondsSinceEpoch;
   set lastUpdateTime(int value) {
-    _sharedPrefs.setInt('lastupdatetime', value);
+    _sharedPrefs.setInt('lastUpdateTime', value);
   }
   
   String get encodedData => _sharedPrefs.getString('encodedData') ?? "";

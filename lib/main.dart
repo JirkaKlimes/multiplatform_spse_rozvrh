@@ -11,8 +11,10 @@ Future<void> main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    HomePage homepage = HomePage();
+    // homepage.init();
     return MaterialApp(
-      home: HomePage(),
+      home: homepage,
     );
   }
 }
