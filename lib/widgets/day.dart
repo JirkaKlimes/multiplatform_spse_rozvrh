@@ -13,9 +13,9 @@ class DayPage extends StatefulWidget {
 }
 
 class DayPageState extends State<DayPage> {
-  double heightFactor = 0.68;
+  double heightFactor = 0.70;
   double hourHeight = 110;
-  double spacerHeight = 25;
+  double spacerHeight = 15;
   late int firstHour;
   late int currentHourIndex = 0;
 
@@ -104,7 +104,7 @@ class DayPageState extends State<DayPage> {
   Widget build(BuildContext context) {
     createHours();
 
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 6; i++){
       hours.add(SizedBox(height: fullHourHeight));
     }
 
