@@ -13,9 +13,9 @@ class DayPage extends StatefulWidget {
 }
 
 class DayPageState extends State<DayPage> {
-  double heightFactor = 0.65;
+  double heightFactor = 0.68;
   double hourHeight = 110;
-  double spacerHeight = 30;
+  double spacerHeight = 25;
   late int firstHour;
   late int currentHourIndex = 0;
 
@@ -27,20 +27,18 @@ class DayPageState extends State<DayPage> {
 
   bool isCurrent(index) {
     if ((DateTime.now().weekday - 1) == widget.dayIndex) {
-      Map hourData = widget.data['hours'][index];
-      List timeFrom = hourData['from'].split(':');
-      List timeTo = hourData['to'].split(':');
-      int breakTime = 30;
+      int from = 0;
+      late List timeFrom;
 
-      if ((widget.dayIndex - 1) >= 0) {
-        breakTime = widget.data['hours'][index]['break'];
+      if ((index - 1) >= 0) {
+        timeFrom = widget.data['hours'][index - 1]['to'].split(':');
+        from = Duration(
+                hours: int.parse(timeFrom[0]), minutes: int.parse(timeFrom[1]))
+            .inMinutes;
       }
 
-      int from = Duration(
-                  hours: int.parse(timeFrom[0]),
-                  minutes: int.parse(timeFrom[1]))
-              .inMinutes -
-          breakTime;
+      List timeTo = widget.data['hours'][index]['to'].split(':');
+
       int to =
           Duration(hours: int.parse(timeTo[0]), minutes: int.parse(timeTo[1]))
               .inMinutes;
@@ -49,7 +47,7 @@ class DayPageState extends State<DayPage> {
           Duration(hours: DateTime.now().hour, minutes: DateTime.now().minute)
               .inMinutes;
 
-      if (now > from && now < to) {
+      if (now >= from && now < to) {
         currentHourIndex = index - firstHour;
         return true;
       }
