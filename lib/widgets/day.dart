@@ -86,7 +86,7 @@ class DayPageState extends State<DayPage> {
       return;
     }
     currentHourIndex = 0;
-    hours = List.empty();
+    hours = List.empty(growable: true);
   }
   
   @override
