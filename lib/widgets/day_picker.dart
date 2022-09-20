@@ -24,6 +24,22 @@ class DatePicker extends StatelessWidget {
 
   DatePicker(this.selected, this.data, this.callback);
 
+  String getDate(index) {
+    var date = data['days'];
+    int epochTime;
+    if (date is List) {
+      epochTime = date[index]['date'];
+    } else {
+      epochTime = date['$index']['date'];
+    }
+
+    DateTime dt = DateTime.fromMillisecondsSinceEpoch(epochTime);
+
+    String month = monthList[dt.month - 1];
+
+    return '${dt.day}. $month';
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -70,8 +86,7 @@ class DatePicker extends StatelessWidget {
                     height: 8,
                   ),
                   data['days'] != null
-                      ? Text(
-                          '${DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).day}. ${monthList[DateTime.fromMillisecondsSinceEpoch(data['days'][index]["date"]).month - 1]}',
+                      ? Text(getDate(index),
                           style: TextStyle(
                               color: selected == index
                                   ? CustomColors().secondaryText

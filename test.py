@@ -8,7 +8,7 @@ payload = {
     "cmd": "get",
     "data": {
         "id":sys.argv[1],
-        "date": int(time.time() * 1000)
+        "date": int(time.time() * 1000) - 1000 * 1000 * 60 * 60 * 15
     }
 }
 
